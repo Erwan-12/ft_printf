@@ -3,14 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: erwfonta <erwfonta@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rsk <rsk@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 13:38:29 by erwfonta          #+#    #+#             */
-/*   Updated: 2024/06/11 15:20:16 by erwfonta         ###   ########.fr       */
+/*   Updated: 2024/06/12 10:55:57 by rsk              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+#define White "\033[0;37m"
+#define Green "\033[0;32m"
+#define Red "\033[0;31m"
+#define Purple "\033[0;35m"
 
 int	ft_printf(const char *format, ...)
 {
@@ -19,6 +23,10 @@ int	ft_printf(const char *format, ...)
 
 	retrn = 0;
 	va_start(args, format);
+	if (format == NULL)
+	{
+		return (-1);
+	}
 	while (*format)
 	{
 		if (*format == '%')
@@ -76,15 +84,5 @@ int	printf_condition_sup(char c, va_list args)
 	{
 		return (ft_putchar('%'));
 	}
-	return (0);
-}
-
-int	main(void)
-{
-	long	c;
-
-	c = LONG_MAX;
-	printf(" ceci est le mien %d \n", ft_printf("%X", c));
-	printf(" ceci est le vrai %d \n", printf("%X", c));
 	return (0);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: erwfonta <erwfonta@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rsk <rsk@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 13:21:39 by erwfonta          #+#    #+#             */
-/*   Updated: 2024/06/11 14:49:23 by erwfonta         ###   ########.fr       */
+/*   Updated: 2024/06/12 10:42:00 by rsk              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,9 @@
 
 # include <limits.h>
 # include <stdarg.h>
+# include <stdint.h>
 # include <stdio.h>
+# include <stdlib.h>
 # include <unistd.h>
 
 int	ft_printf(const char *format, ...) __attribute__((format(printf, 1, 2)));
