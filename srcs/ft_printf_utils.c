@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rsk <rsk@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: erwfonta <erwfonta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/29 13:18:08 by erwfonta          #+#    #+#             */
-/*   Updated: 2024/06/12 10:53:17 by rsk              ###   ########.fr       */
+/*   Updated: 2024/06/12 15:04:50 by erwfonta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,12 @@ int	ft_putnbr_unsigned(unsigned int n)
 	if (n > 9)
 	{
 		count += ft_putnbr_unsigned(n / 10);
+		count += ft_putnbr_unsigned(n % 10);
 	}
-	count += ft_putchar(n % 10);
+	else
+	{
+		count += ft_putchar(n % 10 + '0');
+	}
 	return (count);
 }
 
@@ -86,22 +90,5 @@ int	ft_putptr(void *ptr)
 		return (ft_putstr("(nil)"));
 	count = ft_putstr("0x");
 	count += ft_putnbr_hex(address, "0123456789abcdef");
-	return (count);
-}
-
-int	ft_putnbr_hex(unsigned long nbr, char *base)
-{
-	int	count;
-
-	count = 0;
-	if (nbr >= 16)
-	{
-		count += ft_putnbr_hex(nbr / 16, base);
-		count += ft_putnbr_hex(nbr % 16, base);
-	}
-	else
-	{
-		count += ft_putchar(base[nbr]);
-	}
 	return (count);
 }

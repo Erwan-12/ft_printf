@@ -3,18 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rsk <rsk@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: erwfonta <erwfonta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 13:38:29 by erwfonta          #+#    #+#             */
-/*   Updated: 2024/06/12 10:55:57 by rsk              ###   ########.fr       */
+/*   Updated: 2024/06/12 15:06:21 by erwfonta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#define White "\033[0;37m"
-#define Green "\033[0;32m"
-#define Red "\033[0;31m"
-#define Purple "\033[0;35m"
 
 int	ft_printf(const char *format, ...)
 {
@@ -58,9 +54,7 @@ int	printf_conditions(char c, va_list args)
 		return (ft_putnbr(va_arg(args, int)));
 	}
 	else if (c == 'u')
-	{
 		return (ft_putnbr_unsigned(va_arg(args, unsigned int)));
-	}
 	else
 		return (printf_condition_sup(c, args));
 	return (0);
@@ -74,15 +68,30 @@ int	printf_condition_sup(char c, va_list args)
 	}
 	else if (c == 'x')
 	{
-		return (ft_putnbr_hex(va_arg(args, unsigned long), "0123456789abcdef"));
+		return (ft_putnbr_hex(va_arg(args, unsigned int), "0123456789abcdef"));
 	}
 	else if (c == 'X')
 	{
-		return (ft_putnbr_hex(va_arg(args, unsigned long), "0123456789ABCDEF"));
+		return (ft_putnbr_hex(va_arg(args, unsigned int), "0123456789ABCDEF"));
 	}
 	else if (c == '%')
 	{
 		return (ft_putchar('%'));
 	}
 	return (0);
+}
+
+int	ft_putnbr_hex(unsigned long nbr, char *base)
+{
+	int	count;
+
+	count = 0;
+	if (nbr >= 16)
+	{
+		count += ft_putnbr_hex(nbr / 16, base);
+		count += ft_putnbr_hex(nbr % 16, base);
+	}
+	else
+		count += ft_putchar(base[nbr]);
+	return (count);
 }
